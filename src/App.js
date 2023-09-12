@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+ import Sidebar from './E-component/Sidebar';
+import { Route, Routes, BrowserRouter as Router  } from 'react-router-dom';
+import Navbar from './E-component/Navbar';
+import Home from './E-component/Home';
+import { ProductContext } from './e-context/ProductContext';
+import { useContext } from 'react';
+import ProductDetails from './E-component/ProductDetails';
 
+// import { useState } from 'react';
+// import LoadingBar from 'react-top-loading-bar';
 function App() {
+  const { progress, LoadingBar, setProgress} = useContext(ProductContext)
+
+  // const [progress , setProgress] = useState(LoadingBar)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+    <LoadingBar
+        color='#f11946'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+
+    <Navbar/>
+    <Sidebar/>
+      <Routes>
+        <Route  path='/' element={<Home   /> } />
+        <Route  path='/product/:id' element={<ProductDetails/> } />
+      </Routes>
+    </Router>
+    </>
   );
 }
 

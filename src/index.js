@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import ProductProvider from './e-context/ProductContext';
+import CartProvider from './e-context/CartContext';
+import SidebarProvider from './e-context/SidebarContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
+    <SidebarProvider>
+    <CartProvider>
+    <ProductProvider>
     <App />
+    </ProductProvider>
+    </CartProvider>
+    </SidebarProvider>
   </React.StrictMode>
 );
 
